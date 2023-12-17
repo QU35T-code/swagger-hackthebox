@@ -67,7 +67,64 @@ paths:
       security:
         - AppToken: []
 
-  # /sherlocks/{sherlockName}:
+  /sherlocks/{sherlockName}:
+    get:
+      tags:
+        - "Sherlocks"
+      summary: "Get information about a sherlock."
+      description: "Returns detailed information about a specific sherlock."
+      parameters:
+        - in: path
+          name: sherlockName
+          required: true
+          schema:
+            type: string
+          description: "Name of the sherlock to retrieve information for."
+      responses:
+        '200':
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      difficulty:
+                        type: string
+                      retired:
+                        type: boolean
+                      release_at:
+                        type: string
+                        format: date-time
+                      state:
+                        type: string
+                      show_go_vip:
+                        type: boolean
+                      rating:
+                        type: number
+                        format: double
+                      rating_count:
+                        type: integer
+                      auth_user_has_reviewed:
+                        type: boolean
+                      writeup_visible:
+                        type: boolean
+                      avatar:
+                        type: string
+                      favorite:
+                        type: boolean
+              examples:
+                example:
+                  value: '{"data":{"id":552,"name":"Meerkat","difficulty":"Easy","retired":false,"release_at":"2023-11-13 21:00:00","state":"active","show_go_vip":false,"rating":4.77027027027027,"rating_count":222,"auth_user_has_reviewed":false,"writeup_visible":false,"avatar":"\/storage\/challenges\/94c7bb58efc3b337800875b5d382a072.png","favorite":false}}'
+      security:
+        - AppToken: []
+
 
 components:
   schemas:
