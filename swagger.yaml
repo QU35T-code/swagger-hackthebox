@@ -322,6 +322,19 @@ paths:
       security:
         - AppToken: []
 
+    # GET /api/v4/sherlocks/560/writeup
+    # {"data":{"official":{"filename":"Knock Knock.pdf","sha256":"b61031681bc5723b238b071d46cf7117730084e68d1942a7c0488f7a30db153a","url":"https:\/\/www.hackthebox.com\/api\/v4\/sherlocks\/560\/writeup\/official"}}}
+
+    # GET /api/v4/review/sherlock/560
+    # {"count":14,"average":4.6,"info":[{"id":4594,"user_id":287476,"stars":5,"title":"Really fun","message":"Whilst there were some elements that left my ripping my hair out for a period of time, this was a fantastic lab.\n\nYou're forced to learn about time-lining of events, filtering packets and techniques used by TA's during the initial stages of the Kill-Chain.\n\nThanks, CyberJunkie","created_at":"2023-11-18T14:00:30.000000Z","helpful_reviews_count":4,"authUserInHelpfulChallengeReviews":false,"released":1,"user":{"id":287476,"name":"0xFT","avatar":"\/storage\/avatars\/282b2fff1192c3729168227bde633ad5.png"},"helpful_reviews":[{"id":103,"user_id":468989,"review_id":4594},{"id":109,"user_id":326815,"review_id":4594},{"id":111,"user_id":795682,"review_id":4594},{"id":114,"user_id":128441,"review_id":4594}]}]}
+
+    # GET /api/v4/sherlocks/560/info
+    # {"data":{"id":560,"description":"You are thrusted into a digital crisis at Forela - a crucial Dev server has fallen victim to a cyber attack. This incident unfolds at a critical time for the company as it is expanding its business in Pakistan, under the leadership of senior dev Abdullah. Despite assurances of server hardening, the server was mistakenly exposed to the internet, creating a doorway for the threat actor. The task involves swift analysis & reporting to prevent catastrophic damage to the company's operations. Equipped with a packet capture from the time of the incident, players must sift through a sea of data, with a 1-2 days margin of uncertainty. This cybersecurity whodunit will put your forensic skills to the test, seeking answers to how the attacker breached their defenses in the first place.\r\n\r\n\r\nWarning: This Sherlock will require an element of OSINT to complete fully.","user_owns_count":122}}
+
+    # GET /api/v4/sherlocks/560/writeup/official
+    # %PDF-1.7
+    
+    # TODO : review
 
 components:
   schemas:
