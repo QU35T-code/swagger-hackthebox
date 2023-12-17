@@ -167,6 +167,161 @@ paths:
       security:
         - AppToken: []
 
+  /sherlocks/{sherlockID}/progress:
+    get:
+      tags:
+        - "Sherlocks"
+      summary: "Retrieve progress on a specific sherlock challenge."
+      description: "This endpoint provides the current progress of a user on a specific sherlock challenge, identified by the sherlockID."
+      parameters:
+        - in: path
+          name: sherlockID
+          required: true
+          schema:
+            type: integer
+          description: "Sherlock identifier."
+      responses:
+        '200':
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      is_owned:
+                        type: boolean
+                        description: "Indicates whether the user has completed the challenge."
+                      progress:
+                        type: integer
+                        description: "The user's progress in percentage on the challenge."
+                      total_tasks:
+                        type: integer
+                        description: "Total number of tasks in the challenge."
+                      tasks_answered:
+                        type: integer
+                        description: "Number of tasks answered by the user."
+                      own_rank:
+                        type: integer
+                        description: "The user's rank in owning the challenge."
+              examples:
+                example:
+                  value: '{"data":{"is_owned":false,"progress":10,"total_tasks":10,"tasks_answered":1,"own_rank":1}}'
+      security:
+        - AppToken: []
+
+  /sherlocks/{sherlockID}/tasks:
+    get:
+      tags:
+        - "Sherlocks"
+      summary: "Retrieve a list of tasks for a specific sherlock challenge."
+      description: "This endpoint fetches a list of tasks associated with a given sherlock challenge, identified by the sherlockID."
+      parameters:
+        - in: path
+          name: sherlockID
+          required: true
+          schema:
+            type: integer
+          description: "Sherlock identifier."
+      responses:
+        '200':
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Task'
+              examples:
+                example:
+                  value: '{"data":[{"id":1358,"title":"Task 1","description":"We believe our Business Management Platform server has been compromised. Please can you confirm the name of the application running?","hint":null,"type":{"id":0,"text":"task"},"task_type":{"id":0,"text":"text"},"prerequisite_id":null,"completed":false,"masked_flag":"*********t","options":[]},{"id":1359,"title":"Task 2","description":"We believe the attacker may have used a subset of the brute forcing attack category - what is the name of the attack carried out?","hint":null,"type":{"id":0,"text":"task"},"task_type":{"id":0,"text":"text"},"prerequisite_id":null,"completed":false,"masked_flag":"********** *******g","options":[]},{"id":1360,"title":"Task 3","description":"Does the vulnerability exploited have a CVE assigned - and if so, which one?","hint":null,"type":{"id":0,"text":"task"},"task_type":{"id":0,"text":"text"},"prerequisite_id":null,"completed":false,"masked_flag":"***-****-****7","options":[]},{"id":1361,"title":"Task 4","description":"Which string was appended to the API URL path to bypass the authorization filter by the attacker\"s exploit?","hint":null,"type":{"id":0,"text":"task"},"task_type":{"id":0,"text":"text"},"prerequisite_id":null,"completed":false,"masked_flag":"Please enter with no special characters!","options":[]},{"id":1362,"title":"Task 5","description":"How many combinations of usernames and passwords were used in the credential stuffing attack?","hint":null,"type":{"id":0,"text":"task"},"task_type":{"id":0,"text":"text"},"prerequisite_id":null,"completed":false,"masked_flag":"**","options":[]},{"id":1363,"title":"Task 6","description":"Which username and password combination was successful?","hint":null,"type":{"id":0,"text":"task"},"task_type":{"id":0,"text":"text"},"prerequisite_id":null,"completed":true,"flag":"seb.broom@forela.co.uk:g0vernm3nt","masked_flag":"username:password","options":[]},{"id":1364,"title":"Task 7","description":"If any, which text sharing site did the attacker utilise?","hint":null,"type":{"id":0,"text":"task"},"task_type":{"id":0,"text":"text"},"prerequisite_id":null,"completed":false,"masked_flag":"******.*o","options":[]},{"id":1366,"title":"Task 9","description":"Please provide the filename of the public key used by the attacker to gain persistence on our host.","hint":null,"type":{"id":0,"text":"task"},"task_type":{"id":0,"text":"text"},"prerequisite_id":null,"completed":false,"masked_flag":"Filename","options":[]},{"id":1367,"title":"Task 10","description":"Can you confirmed the file modified by the attacker to gain persistence?","hint":null,"type":{"id":0,"text":"task"},"task_type":{"id":0,"text":"text"},"prerequisite_id":null,"completed":false,"masked_flag":"\/****\/******\/.***\/**********_***s","options":[]},{"id":1368,"title":"Task 11","description":"Can you confirm the MITRE technique ID of this type of persistence mechanism?","hint":null,"type":{"id":0,"text":"task"},"task_type":{"id":0,"text":"text"},"prerequisite_id":null,"completed":false,"masked_flag":"T****.***","options":[]}]}'
+      security:
+        - AppToken: []
+
+  /sherlocks/{sherlockID}/download_link:
+    get:
+      tags:
+        - "Sherlocks"
+      summary: "Retrieve the download link for a sherlock challenge."
+      description: "This endpoint provides a direct download link for the files associated with a specific sherlock challenge, identified by the sherlockID."
+      parameters:
+        - in: path
+          name: sherlockID
+          required: true
+          schema:
+            type: integer
+          description: "Sherlock identifier."
+      responses:
+        '200':
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    description: "The URL for downloading the challenge resources."
+                  expires_in:
+                    type: integer
+                    description: "Time in seconds until the download link expires."
+              examples:
+                example:
+                  value: '{"url":"https:\/\/challenges-cdn.hackthebox.com\/sherlocks\/easy\/meerkat.zip?u=128441&p=mp&e=1702856652&t=1702849452&h=e07373d7533a36ed35788f052fed02478d28a15320ff2a7829b717cd480e2de5","expires_in":7200}'
+      security:
+        - AppToken: []
+
+  /sherlocks/{sherlockID}/tasks/{taskID}/flag:
+    post:
+      tags:
+        - "Sherlocks"
+      summary: "Submit a flag for a specific task in a sherlock challenge."
+      description: "This endpoint allows participants to submit a flag for validation for a specific task within a sherlock challenge."
+      parameters:
+        - in: path
+          name: sherlockID
+          required: true
+          schema:
+            type: integer
+          description: "Sherlock identifier."
+        - in: path
+          name: taskID
+          required: true
+          schema:
+            type: integer
+          description: "Unique identifier of the specific task within the sherlock challenge."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                flag:
+                  type: string
+                  description: "The flag to be validated for the task."
+      responses:
+        '200':
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: "Response message indicating whether the submitted flag is correct or incorrect."
+              examples:
+                example:
+                  value: '{"message":"Incorrect task flag!"}'
+      security:
+        - AppToken: []
+
 
 components:
   schemas:
@@ -247,6 +402,43 @@ components:
           type: string
         isRespected:
           type: boolean
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        hint:
+          type: string
+        type:
+          type: object
+          properties:
+            id:
+              type: integer
+            text:
+              type: string
+        task_type:
+          type: object
+          properties:
+            id:
+              type: integer
+            text:
+              type: string
+        prerequisite_id:
+          type: integer
+        completed:
+          type: boolean
+        masked_flag:
+          type: string
+        options:
+          type: array
+          items:
+            type: string
+        flag:
+          type: string
 
   securitySchemes:
     AppToken:
