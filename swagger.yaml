@@ -125,6 +125,48 @@ paths:
       security:
         - AppToken: []
 
+  /sherlocks/{sherlockID}/play:
+    get:
+      tags:
+        - "Sherlocks"
+      summary: "Displays the scenario, creator and files attached to the sherlock."
+      description: "This endpoint retrieves detailed information about a specific sherlock challenge identified by the provided sherlockID."
+      parameters:
+        - in: path
+          name: sherlockID
+          required: true
+          schema:
+            type: integer
+          description: "Sherlock identifier."
+      responses:
+        '200':
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      scenario:
+                        type: string
+                      creators:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Creator'
+                      file_name:
+                        type: string
+                      file_size:
+                        type: string
+              examples:
+                example:
+                  value: '{"data":{"id":552,"scenario":"As a fast growing startup, Forela have been utilising a business management platform. Unfortunately our documentation is scarce and our administrators aren\"t the most security aware. As our new security provider we\"d like you to take a look at some PCAP and log data we have exported to confirm if we have (or have not) been compromised.","creators":[{"id":118669,"name":"sebh24","avatar":"\/storage\/avatars\/934a85fc29e045b2b2a3406d6188d0e9.png","isRespected":false}],"file_name":"meerkat.zip","file_size":"6 MB"}}'
+      security:
+        - AppToken: []
+
 
 components:
   schemas:
@@ -193,6 +235,17 @@ components:
         label:
           type: string
         active:
+          type: boolean
+    Creator:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        avatar:
+          type: string
+        isRespected:
           type: boolean
 
   securitySchemes:
