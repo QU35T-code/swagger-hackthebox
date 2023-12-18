@@ -1,0 +1,173 @@
+openapi: 3.0.3
+info:
+  description: "Unofficial HackTheBox API documentation."
+  version: "1.0.0"
+  title: "HackTheBox API"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "github@qu35t-mail.simplelogin.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+servers:
+  - url: "https://www.hackthebox.com/api/v4"
+tags:
+- name: "Sherlocks"
+  description: "Blue team mode"
+  externalDocs:
+    description: "HackTheBox link"
+    url: "https://app.hackthebox.com/sherlocks"
+- name: "Machines"
+  description: "HackTheBox machines"
+  externalDocs:
+    description: "HackTheBox link"
+    url: "https://app.hackthebox.com/machines"
+- name: "Challenges"
+  description: "HackTheBox challenges"
+  externalDocs:
+    description: "HackTheBox link"
+    url: "https://app.hackthebox.com/challenges"
+paths:
+  /sherlocks:
+    $ref: './paths/sherlocks.yaml#/Sherlocks'
+
+  /sherlocks/{sherlockName}:
+    $ref: './paths/sherlocks.yaml#/SherlockName'
+
+  /sherlocks/{sherlockID}/play:
+    $ref: './paths/sherlocks.yaml#/SherlockPlay'
+
+  /sherlocks/{sherlockID}/progress:
+    $ref: './paths/sherlocks.yaml#/SherlockProgress'
+
+  /sherlocks/{sherlockID}/tasks:
+    $ref: './paths/sherlocks.yaml#/SherlockTasks'
+
+  /sherlocks/{sherlockID}/download_link:
+    $ref: './paths/sherlocks.yaml#/SherlockDownloadLink'
+
+  /sherlocks/{sherlockID}/tasks/{taskID}/flag:
+    $ref: './paths/sherlocks.yaml#/SherlockFlag'
+
+components:
+  schemas:
+    Challenge:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        difficulty:
+          type: string
+        state:
+          type: string
+        solves:
+          type: integer
+        is_owned:
+          type: boolean
+        rating:
+          type: number
+        rating_count:
+          type: integer
+        auth_user_has_reviewed:
+          type: boolean
+        progress:
+          type: integer
+        avatar:
+          type: string
+    Links:
+      type: object
+      properties:
+        first:
+          type: string
+        last:
+          type: string
+        prev:
+          type: string
+        next:
+          type: string
+    Meta:
+      type: object
+      properties:
+        current_page:
+          type: integer
+        from:
+          type: integer
+        last_page:
+          type: integer
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+        path:
+          type: string
+        per_page:
+          type: integer
+        to:
+          type: integer
+        total:
+          type: integer
+    Link:
+      type: object
+      properties:
+        url:
+          type: string
+        label:
+          type: string
+        active:
+          type: boolean
+    Creator:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        avatar:
+          type: string
+        isRespected:
+          type: boolean
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        hint:
+          type: string
+        type:
+          type: object
+          properties:
+            id:
+              type: integer
+            text:
+              type: string
+        task_type:
+          type: object
+          properties:
+            id:
+              type: integer
+            text:
+              type: string
+        prerequisite_id:
+          type: integer
+        completed:
+          type: boolean
+        masked_flag:
+          type: string
+        options:
+          type: array
+          items:
+            type: string
+        flag:
+          type: string
+
+  securitySchemes:
+    AppToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
