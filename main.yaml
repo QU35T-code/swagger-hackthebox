@@ -17,16 +17,16 @@ tags:
   externalDocs:
     description: "HackTheBox link"
     url: "https://app.hackthebox.com/sherlocks"
-- name: "Machines"
-  description: "HackTheBox machines"
-  externalDocs:
-    description: "HackTheBox link"
-    url: "https://app.hackthebox.com/machines"
 - name: "Challenges"
   description: "HackTheBox challenges"
   externalDocs:
     description: "HackTheBox link"
     url: "https://app.hackthebox.com/challenges"
+- name: "Machines"
+  description: "HackTheBox machines"
+  externalDocs:
+    description: "HackTheBox link"
+    url: "https://app.hackthebox.com/machines"
 paths:
   /sherlocks:
     $ref: './paths/sherlocks.yaml#/Sherlocks'
@@ -60,6 +60,65 @@ paths:
 
   /sherlocks/{sherlockID}/tasks/{taskID}/flag:
     $ref: './paths/sherlocks.yaml#/SherlockFlag'
+
+
+  /challenge/categories/list:
+    $ref: './paths/challenges.yaml#/ChallengeCategoriesList'
+  
+  /challenge/list:
+    $ref: './paths/challenges.yaml#/ChallengesList'
+
+  /challenge/list/retired:
+    $ref: './paths/challenges.yaml#/ChallengesListRetired'
+
+  /challenge/todo:
+    $ref: './paths/challenges.yaml#/ChallengesTodo'
+
+  /challenge/recommended:
+    $ref: './paths/challenges.yaml#/ChallengesRecommended'
+
+  /challenge/info/{challengeName}:
+    $ref: './paths/challenges.yaml#/ChallengeInfo'
+  
+  /challenge/changelog/{challengeID}:
+    $ref: './paths/challenges.yaml#/ChallengeChangelog'
+  
+  /challenge/download/{challengeID}:
+    $ref: './paths/challenges.yaml#/ChallengeDownload'
+
+  
+
+  
+
+  /challenge/activity/{challengeID}:
+    $ref: './paths/challenges.yaml#/ChallengeActivity'
+
+  
+
+  /challenge/reviews/{challengeID}:
+    $ref: './paths/challenges.yaml#/ChallengeReviews'
+
+  /challenge/{challengeID}/writeup:
+    $ref: './paths/challenges.yaml#/ChallengeWriteup'
+  
+  /challenge/todo/update/{challengeID}:
+    $ref: './paths/challenges.yaml#/ChallengeUpdateTodo'
+
+  /challenge/start:
+    $ref: './paths/challenges.yaml#/ChallengeStartInstance'
+  
+  /challenge/stop:
+    $ref: './paths/challenges.yaml#/ChallengeStopInstance'
+
+  /challenge/own:
+    $ref: './paths/challenges.yaml#/ChallengeFlag'
+
+  /challenge/review:
+    $ref: './paths/challenges.yaml#/ChallengeReview'
+
+  /challenge/review/helpful/{reviewID}:
+    $ref: './paths/challenges.yaml#/ChallengeHelpfulReview'
+
 
 components:
   schemas:

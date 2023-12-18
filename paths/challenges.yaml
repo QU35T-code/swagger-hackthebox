@@ -1,0 +1,1025 @@
+ChallengesTodo:
+  get:
+    tags:
+      - "Challenges"
+    summary: "Retrieve a list of challenges marked as 'To-Do'."
+    description: "This endpoint fetches a list of challenges that the user has marked as 'To-Do', allowing for easy tracking and organization of challenges they plan to attempt."
+    responses:
+      '200':
+        description: "successful operation"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                info:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      url_name:
+                        type: string
+                      difficulty:
+                        type: string
+                      points:
+                        type: integer
+                      difficulty_chart:
+                        type: object
+                        properties:
+                          counterCake:
+                            type: integer
+                          counterVeryEasy:
+                            type: integer
+                          counterEasy:
+                            type: integer
+                          counterTooEasy:
+                            type: integer
+                          counterMedium:
+                            type: integer
+                          counterBitHard:
+                            type: integer
+                          counterHard:
+                            type: integer
+                          counterTooHard:
+                            type: integer
+                          counterExHard:
+                            type: integer
+                          counterBrainFuck:
+                            type: integer
+                      difficulty_chart_arr:
+                        type: array
+                        items:
+                          type: integer
+                      solves:
+                        type: integer
+                      authUserSolve:
+                        type: boolean
+                      likes:
+                        type: integer
+                      dislikeByAuthUser:
+                        type: boolean
+                      rating:
+                        type: number
+                      authUserHasReviewed:
+                        type: boolean
+                      isCompleted:
+                        type: boolean
+                      isActive:
+                        type: boolean
+                      release_date:
+                        type: string
+                        format: date-time
+                      challenge_category_id:
+                        type: integer
+                      retired:
+                        type: integer
+                      recommended:
+                        type: integer
+            examples:
+              example:
+                value: '{"info":[{"id":245,"name":"Gunship","url_name":"gunship","difficulty":"Very Easy","points":0,"difficulty_chart":{"counterCake":311,"counterVeryEasy":438,"counterEasy":869,"counterTooEasy":969,"counterMedium":539,"counterBitHard":251,"counterHard":165,"counterTooHard":58,"counterExHard":16,"counterBrainFuck":65},"difficulty_chart_arr":[311,438,869,969,539,251,165,58,16,65],"solves":3691,"authUserSolve":true,"likes":630,"likeByAuthUser":false,"dislikes":20,"dislikeByAuthUser":false,"rating":4.9,"authUserHasReviewed":false,"isCompleted":true,"isActive":false,"release_date":"2021-08-13T20:00:00.000000Z","challenge_category_id":5,"retired":1,"recommended":0}]}'
+    security:
+      - AppToken: []
+
+ChallengesList:
+  get:
+    tags:
+      - "Challenges"
+    summary: "List all active challenges."
+    description: "Provides a comprehensive list of all active challenges, including details such as difficulty, points, likes, and solve count."
+    responses:
+      '200':
+        description: "successful operation"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                challenges:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      url_name:
+                        type: string
+                      retired:
+                        type: integer
+                      difficulty:
+                        type: string
+                      avg_difficulty:
+                        type: integer
+                      points:
+                        type: string
+                      static_points:
+                        type: string
+                      difficulty_chart:
+                        type: object
+                        properties:
+                          counterCake:
+                            type: integer
+                          counterVeryEasy:
+                            type: integer
+                          counterEasy:
+                            type: integer
+                          counterTooEasy:
+                            type: integer
+                          counterMedium:
+                            type: integer
+                          counterBitHard:
+                            type: integer
+                          counterHard:
+                            type: integer
+                          counterTooHard:
+                            type: integer
+                          counterExHard:
+                            type: integer
+                          counterBrainFuck:
+                            type: integer
+                      difficulty_chart_arr:
+                        type: array
+                        items:
+                          type: integer
+                      solves:
+                        type: integer
+                      likes:
+                        type: integer
+                      dislikes:
+                        type: integer
+                      release_date:
+                        type: string
+                        format: date-time
+                      isCompleted:
+                        type: boolean
+                      challenge_category_id:
+                        type: integer
+                      likeByAuthUser:
+                        type: boolean
+                      dislikeByAuthUser:
+                        type: boolean
+                      rating:
+                        type: number
+                      authUserSolve:
+                        type: boolean
+                      state:
+                        type: string
+                      isActive:
+                        type: boolean
+                      isTodo:
+                        type: boolean
+                      recommended:
+                        type: integer
+                      authUserHasReviewed:
+                        type: boolean
+            examples:
+              example:
+                value: '{"challenges":[{"id":4,"name":"Bombs Landed","url_name":"bombs-landed","retired":0,"difficulty":"Medium","avg_difficulty":56,"points":"50","static_points":"50","difficulty_chart":{"counterCake":203,"counterVeryEasy":127,"counterEasy":333,"counterTooEasy":481,"counterMedium":908,"counterBitHard":752,"counterHard":764,"counterTooHard":312,"counterExHard":158,"counterBrainFuck":178},"difficulty_chart_arr":[203,127,333,481,908,752,764,312,158,178],"solves":4093,"likes":851,"dislikes":33,"release_date":"2017-06-30T19:00:00.000000Z","isCompleted":false,"challenge_category_id":1,"likeByAuthUser":false,"dislikeByAuthUser":false,"rating":4.8,"authUserSolve":false,"state":"active","isActive":false,"isTodo":false,"recommended":0,"authUserHasReviewed":false},{"id":39,"name":"Reminiscent","url_name":"reminiscent","retired":0,"difficulty":"Easy","avg_difficulty":40,"points":"30","static_points":"30","difficulty_chart":{"counterCake":812,"counterVeryEasy":966,"counterEasy":2645,"counterTooEasy":2489,"counterMedium":2382,"counterBitHard":942,"counterHard":481,"counterTooHard":138,"counterExHard":59,"counterBrainFuck":108},"difficulty_chart_arr":[812,966,2645,2489,2382,942,481,138,59,108],"solves":10943,"likes":1824,"dislikes":28,"release_date":"2017-10-26T19:00:00.000000Z","isCompleted":true,"challenge_category_id":7,"likeByAuthUser":false,"dislikeByAuthUser":false,"rating":4.9,"authUserSolve":true,"state":"active","isActive":false,"isTodo":false,"recommended":0,"authUserHasReviewed":false}]}'
+    security:
+      - AppToken: []
+
+ChallengesListRetired:
+  get:
+    tags:
+      - "Challenges"
+    summary: "List all retired challenges."
+    description: "Fetches a list of all challenges that have been retired, including information about their difficulty, user engagement, and release dates."
+    responses:
+      '200':
+        description: "successful operation"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                challenges:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      url_name:
+                        type: string
+                      retired:
+                        type: integer
+                      difficulty:
+                        type: string
+                      avg_difficulty:
+                        type: integer
+                      points:
+                        type: string
+                      static_points:
+                        type: string
+                      difficulty_chart:
+                        type: object
+                        properties:
+                          counterCake:
+                            type: integer
+                          counterVeryEasy:
+                            type: integer
+                          counterEasy:
+                            type: integer
+                          counterTooEasy:
+                            type: integer
+                          counterMedium:
+                            type: integer
+                          counterBitHard:
+                            type: integer
+                          counterHard:
+                            type: integer
+                          counterTooHard:
+                            type: integer
+                          counterExHard:
+                            type: integer
+                          counterBrainFuck:
+                            type: integer
+                      difficulty_chart_arr:
+                        type: array
+                        items:
+                          type: integer
+                      solves:
+                        type: integer
+                      likes:
+                        type: integer
+                      dislikes:
+                        type: integer
+                      release_date:
+                        type: string
+                        format: date-time
+                      isCompleted:
+                        type: boolean
+                      challenge_category_id:
+                        type: integer
+                      likeByAuthUser:
+                        type: boolean
+                      dislikeByAuthUser:
+                        type: boolean
+                      rating:
+                        type: number
+                      authUserSolve:
+                        type: boolean
+                      state:
+                        type: string
+                      isActive:
+                        type: boolean
+                      isTodo:
+                        type: boolean
+                      recommended:
+                        type: integer
+                      authUserHasReviewed:
+                        type: boolean
+            examples:
+              example:
+                value: '{"challenges":[{"id":2,"name":"The Art of Reversing","url_name":"the-art-of-reversing","retired":1,"difficulty":"Easy","avg_difficulty":32,"points":0,"static_points":"40","difficulty_chart":{"counterCake":358,"counterVeryEasy":424,"counterEasy":1185,"counterTooEasy":511,"counterMedium":318,"counterBitHard":90,"counterHard":69,"counterTooHard":9,"counterExHard":5,"counterBrainFuck":15},"difficulty_chart_arr":[358,424,1185,511,318,90,69,9,5,15],"solves":3020,"likes":922,"dislikes":35,"release_date":"2017-06-29T19:00:00.000000Z","isCompleted":false,"challenge_category_id":1,"likeByAuthUser":false,"dislikeByAuthUser":false,"rating":4.9,"authUserSolve":false,"state":"retired","isActive":false,"isTodo":false,"recommended":0,"authUserHasReviewed":false},{"id":3,"name":"Tear Or Dear","url_name":"tear-or-dear","retired":1,"difficulty":"Easy","avg_difficulty":35,"points":0,"static_points":"20","difficulty_chart":{"counterCake":308,"counterVeryEasy":525,"counterEasy":1757,"counterTooEasy":1111,"counterMedium":512,"counterBitHard":186,"counterHard":65,"counterTooHard":21,"counterExHard":3,"counterBrainFuck":28},"difficulty_chart_arr":[308,525,1757,1111,512,186,65,21,3,28],"solves":4538,"likes":1294,"dislikes":36,"release_date":"2017-06-29T19:00:00.000000Z","isCompleted":false,"challenge_category_id":1,"likeByAuthUser":false,"dislikeByAuthUser":false,"rating":4.9,"authUserSolve":false,"state":"retired","isActive":false,"isTodo":false,"recommended":0,"authUserHasReviewed":false}]}'
+    security:
+      - AppToken: []
+
+ChallengesRecommended:
+  get:
+    tags:
+      - "Challenges"
+    summary: "Get a list of recommended challenges."
+    description: "This endpoint suggests challenges for the user to try, based on factors like difficulty and popularity."
+    responses:
+      '200':
+        description: "successful operation"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  type: array
+                  items:
+                    type: string
+                card1:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    url_name:
+                      type: string
+                    difficulty:
+                      type: string
+                    category_name:
+                      type: string
+                    retired:
+                      type: integer
+                    release_date:
+                      type: string
+                      format: date-time
+                    state:
+                      type: string
+                    rating:
+                      type: number
+                card2:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    url_name:
+                      type: string
+                    difficulty:
+                      type: string
+                    retired:
+                      type: integer
+                    category_name:
+                      type: string
+                    release_date:
+                      type: string
+                      format: date-time
+                    rating:
+                      type: number
+                    state:
+                      type: string
+            examples:
+              example:
+                value: '{"state":["live","staff_pick"],"card1":{"id":583,"name":"Fentastic Moves","url_name":"fentastic-moves","difficulty":"Easy","category_name":"Misc","retired":0,"release_date":"2023-12-15T20:00:00.000000Z","state":"active"},"card2":{"id":120,"name":"oBfsC4t10n2","url_name":"obfsc4t10n2","difficulty":"Hard","retired":0,"category_name":"Forensics","release_date":"2020-04-24T19:00:00.000000Z","rating":4.8,"state":"active"}}'
+    security:
+      - AppToken: []
+
+ChallengeInfo:
+  get:
+    tags:
+      - "Challenges"
+    summary: "Retrieve detailed information of a specific challenge."
+    description: "Provides in-depth details about a particular challenge, including its difficulty, solve rate, creator info, and more."
+    parameters:
+      - in: path
+        name: challengeName
+        required: true
+        schema:
+          type: string
+        description: "Challenge name."
+    responses:
+      '200':
+        description: "successful operation"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                challenge:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    retired:
+                      type: integer
+                    state:
+                      type: string
+                    difficulty:
+                      type: string
+                    points:
+                      type: string
+                    difficulty_chart:
+                      type: object
+                      properties:
+                        counterCake:
+                          type: integer
+                        counterVeryEasy:
+                          type: integer
+                        counterEasy:
+                          type: integer
+                        counterTooEasy:
+                          type: integer
+                        counterMedium:
+                          type: integer
+                        counterBitHard:
+                          type: integer
+                        counterHard:
+                          type: integer
+                        counterTooHard:
+                          type: integer
+                        counterExHard:
+                          type: integer
+                        counterBrainFuck:
+                          type: integer
+                    solves:
+                      type: integer
+                    authUserSolveTime:
+                      type: string
+                    likes:
+                      type: integer
+                    dislikes:
+                      type: integer
+                    stars:
+                      type: number
+                    description:
+                      type: string
+                    category_name:
+                      type: string
+                    first_blood_user_id:
+                      type: integer
+                    first_blood_user:
+                      type: string
+                    first_blood_time:
+                      type: string
+                    first_blood_user_avatar:
+                      type: string
+                    creator_id:
+                      type: integer
+                    creator_name:
+                      type: string
+                    creator_avatar:
+                      type: string
+                    isRespected:
+                      type: boolean
+                    creator2_id:
+                      type: integer
+                    creator2_name:
+                      type: string
+                    creator2_avatar:
+                      type: string
+                    isRespected2:
+                      type: boolean
+                    download:
+                      type: boolean
+                    sha256:
+                      type: string
+                    docker:
+                      type: boolean
+                    docker_ip:
+                      type: string
+                    docker_port:
+                      type: integer
+                    release_date:
+                      type: string
+                      format: date-time
+                    released:
+                      type: integer
+                    authUserSolve:
+                      type: boolean
+                    likeByAuthUser:
+                      type: boolean
+                    dislikeByAuthUser:
+                      type: boolean
+                    isTodo:
+                      type: boolean
+                    recommended:
+                      type: integer
+                    authUserHasReviewed:
+                      type: boolean
+                    user_can_review:
+                      type: boolean
+            examples:
+              example:
+                value: '{"challenge":{"id":144,"name":"Hunting","retired":0,"state":"active","difficulty":"easy","points":"30","difficulty_chart":{"counterCake":313,"counterVeryEasy":305,"counterEasy":649,"counterTooEasy":797,"counterMedium":790,"counterBitHard":340,"counterHard":280,"counterTooHard":96,"counterExHard":46,"counterBrainFuck":76},"solves":3659,"authUserSolveTime":null,"likes":268,"dislikes":12,"stars":4.8,"description":"I\"ve hidden the flag very carefully, you\"ll never manage to find it!\r\nPlease note that the goal is to find the flag, and not to obtain a shell.","category_name":"Pwn","first_blood_user_id":275298,"first_blood_user":"m4cz","first_blood_time":"0H 34M 11S","first_blood_user_avatar":"\/storage\/avatars\/e02601e7f4cb3dce6f3744254dcc4f7d.png","creator_id":83743,"creator_name":"clubby789","creator_avatar":"\/storage\/avatars\/df933a86af33a9323a05c5533c992e42.png","isRespected":true,"creator2_id":null,"creator2_name":null,"creator2_avatar":null,"isRespected2":null,"download":true,"sha256":"fd9ea9972902d81ecd65b2d515f5104c46b9718c7de57a186b049d8047a711ae","docker":true,"docker_ip":null,"docker_port":null,"release_date":"2020-09-25T19:00:00.000000Z","released":1,"authUserSolve":false,"likeByAuthUser":false,"dislikeByAuthUser":false,"isTodo":false,"recommended":0,"authUserHasReviewed":false,"user_can_review":false}}'
+    security:
+      - AppToken: []
+
+ChallengeChangelog:
+  get:
+    tags:
+      - "Challenges"
+    summary: "Get the changelog for a specific challenge."
+    description: "Fetches the historical changes and updates made to a specific challenge."
+    parameters:
+      - in: path
+        name: challengeID
+        required: true
+        schema:
+          type: integer
+        description: "Challenge identifier."
+    responses:
+      '200':
+        description: "successful operation"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: boolean
+                data:
+                  type: array
+                  items:
+                    type: object
+            examples:
+              example:
+                value: '{"status":true,"data":[]}'
+    security:
+      - AppToken: []
+
+ChallengeDownload:
+  get:
+    tags:
+      - "Challenges"
+    summary: "Download resources for a specific challenge."
+    description: "Allows users to download necessary files or resources related to a specific challenge."
+    parameters:
+      - in: path
+        name: challengeID
+        required: true
+        schema:
+          type: integer
+        description: "Challenge identifier."
+    responses:
+      '200':
+        description: "successful operation"
+        content:
+          application/json:
+            examples:
+              example:
+                value: 'Zip archive'
+    security:
+      - AppToken: []
+
+ChallengeFlag:
+  post:
+    tags:
+      - "Challenges"
+    summary: "Submit a flag for a specific challenge."
+    description: "Endpoint for users to submit their solution flag for a challenge and get validation feedback."
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              flag:
+                type: string
+                description: "The flag submitted by the user for the challenge."
+              challenge_id:
+                type: integer
+                description: "The unique identifier of the challenge."
+              difficulty:
+                type: integer
+                description: "The difficulty rating provided by the user for the challenge."
+          example:
+            flag: "HTB{flag4testing}"
+            challenge_id: 144
+            difficulty: 10
+    responses:
+      '200':
+        description: "successful operation"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  description: "Feedback message indicating whether the flag submission was correct or incorrect."
+            examples:
+              example:
+                value: '{"message":"Incorrect flag"}'
+    security:
+      - AppToken: []
+
+ChallengeUpdateTodo:
+  post:
+    tags:
+      - "Challenges"
+    summary: "Update the 'To-Do' list for challenges."
+    description: "Allows users to update their personal 'To-Do' list by adding or removing challenges."
+    parameters:
+      - in: path
+        name: challengeID
+        required: true
+        schema:
+          type: integer
+        description: "Challenge identifier."
+    responses:
+      '200':
+        description: "successful operation"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                info:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      url_name:
+                        type: string
+                      difficulty:
+                        type: string
+                      points:
+                        type: integer
+                      difficulty_chart:
+                        type: object
+                        properties:
+                          counterCake:
+                            type: integer
+                          counterVeryEasy:
+                            type: integer
+                          counterEasy:
+                            type: integer
+                          counterTooEasy:
+                            type: integer
+                          counterMedium:
+                            type: integer
+                          counterBitHard:
+                            type: integer
+                          counterHard:
+                            type: integer
+                          counterTooHard:
+                            type: integer
+                          counterExHard:
+                            type: integer
+                          counterBrainFuck:
+                            type: integer
+                      difficulty_chart_arr:
+                        type: array
+                        items:
+                          type: integer
+                      solves:
+                        type: integer
+                      authUserSolve:
+                        type: boolean
+                      likes:
+                        type: integer
+                      dislikes:
+                        type: integer
+                      likeByAuthUser:
+                        type: boolean
+                      dislikeByAuthUser:
+                        type: boolean
+                      rating:
+                        type: number
+                      authUserHasReviewed:
+                        type: boolean
+                      isCompleted:
+                        type: boolean
+                      isActive:
+                        type: boolean
+                      release_date:
+                        type: string
+                        format: date-time
+                      challenge_category_id:
+                        type: integer
+                      retired:
+                        type: integer
+                      recommended:
+                        type: integer
+            examples:
+              example:
+                value: '{"info":[{"id":245,"name":"Gunship","url_name":"gunship","difficulty":"Very Easy","points":0,"difficulty_chart":{"counterCake":311,"counterVeryEasy":438,"counterEasy":869,"counterTooEasy":969,"counterMedium":539,"counterBitHard":251,"counterHard":165,"counterTooHard":58,"counterExHard":16,"counterBrainFuck":65},"difficulty_chart_arr":[311,438,869,969,539,251,165,58,16,65],"solves":3691,"authUserSolve":true,"likes":630,"likeByAuthUser":false,"dislikes":20,"dislikeByAuthUser":false,"rating":4.9,"authUserHasReviewed":false,"isCompleted":true,"isActive":false,"release_date":"2021-08-13T20:00:00.000000Z","challenge_category_id":5,"retired":1,"recommended":0},{"id":144,"name":"Hunting","url_name":"hunting","difficulty":"easy","points":"30","difficulty_chart":{"counterCake":313,"counterVeryEasy":305,"counterEasy":649,"counterTooEasy":797,"counterMedium":790,"counterBitHard":340,"counterHard":280,"counterTooHard":96,"counterExHard":46,"counterBrainFuck":76},"difficulty_chart_arr":[313,305,649,797,790,340,280,96,46,76],"solves":3659,"authUserSolve":false,"likes":268,"likeByAuthUser":false,"dislikes":12,"dislikeByAuthUser":false,"rating":4.8,"authUserHasReviewed":false,"isCompleted":false,"isActive":false,"release_date":"2020-09-25T19:00:00.000000Z","challenge_category_id":4,"retired":0,"recommended":0}]}'
+    security:
+      - AppToken: []
+
+ChallengeStopInstance:
+  post:
+    tags:
+      - "Challenges"
+    summary: "Stop a running challenge instance."
+    description: "Provides functionality to stop a currently active challenge instance for the user."
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              challenge_id:
+                type: integer
+                description: "Unique identifier of the challenge for which the instance needs to be stopped."
+          example:
+            challenge_id: 123
+    responses:
+      '200':
+        description: "successful operation"
+        content:
+          application/json:
+            schema:
+              TODO
+            examples:
+              example:
+                value: '{"message":"Container Stopped"}'
+    security:
+      - AppToken: []
+
+ChallengeStartInstance:
+  post:
+    tags:
+      - "Challenges"
+    summary: "Start a new instance of a challenge."
+    description: "Enables users to initiate a new instance of a challenge, providing details such as IP and port."
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              challenge_id:
+                type: integer
+                description: "Unique identifier of the challenge for which an instance needs to be started."
+          example:
+            challenge_id: 123
+    responses:
+      '200':
+        description: "successful operation"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  description: "Confirmation message indicating the challenge instance has been created."
+                id:
+                  type: string
+                  description: "Identifier for the started challenge instance."
+                port:
+                  type: integer
+                  description: "Port number assigned to the started challenge instance."
+                ip:
+                  type: string
+                  description: "IP address assigned to the started challenge instance."
+            examples:
+              example:
+                value: '{"message":"Instance Created!","id":"pwnhuntingfixedmp-128441","port":30246,"ip":"188.166.175.58"}'
+    security:
+      - AppToken: []
+
+ChallengeActivity:
+  get:
+    tags:
+      - "Challenges"
+    summary: "Get activity log for a specific challenge."
+    description: "Fetches the activity log for a challenge, including solve dates and user interactions."
+    parameters:
+      - in: path
+        name: challengeID
+        required: true
+        schema:
+          type: integer
+        description: "Challenge identifier."
+    responses:
+      '200':
+        description: "successful operation"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                info:
+                  type: object
+                  properties:
+                    activity:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          created_at:
+                            type: string
+                            format: date-time
+                            description: "Timestamp of the activity."
+                          date:
+                            type: string
+                            description: "Formatted date of the activity."
+                          date_diff:
+                            type: string
+                            description: "Time difference from the current date."
+                          user_id:
+                            type: integer
+                            description: "Identifier of the user involved in the activity."
+                          user_name:
+                            type: string
+                            description: "Name of the user involved in the activity."
+                          user_avatar:
+                            type: string
+                            description: "Avatar URL of the user."
+                          type:
+                            type: string
+                            description: "Type of the activity (e.g., 'blood', 'own')."
+            examples:
+              example:
+                value: '{"info":{"activity":[{"created_at":"2020-09-25T19:34:11.000000Z","date":"September 25th, 2020 10:34 pm","date_diff":"3 years ago","user_id":275298,"user_name":"m4cz","user_avatar":"\/storage\/avatars\/e02601e7f4cb3dce6f3744254dcc4f7d.png","type":"blood"},{"created_at":"2023-12-15T16:08:36.000000Z","date":"December 15th, 2023 6:08 pm","date_diff":"2 days ago","user_id":905477,"user_name":"bryanmcnulty","user_avatar":"\/storage\/avatars\/7e1898d97fde39176a63a94cbdcb8017.png","type":"own"},{"created_at":"2023-12-15T22:20:35.000000Z","date":"December 16th, 2023 12:20 am","date_diff":"2 days ago","user_id":300233,"user_name":"TonyParadise","user_avatar":"\/storage\/avatars\/a33700d350b17fffbe82b9321d2b2c5f.png","type":"own"},{"created_at":"2023-12-16T10:20:22.000000Z","date":"December 16th, 2023 12:20 pm","date_diff":"2 days ago","user_id":1617581,"user_name":"Trevohack","user_avatar":"\/storage\/avatars\/ddb61acbf2468cafbba20e5c381fea60.png","type":"own"},{"created_at":"2023-12-17T04:24:03.000000Z","date":"December 17th, 2023 6:24 am","date_diff":"1 day ago","user_id":95078,"user_name":"RedaT","user_avatar":"\/storage\/avatars\/2d44ad880ccae40534a8d12eb445ae00.png","type":"own"},{"created_at":"2023-12-17T11:46:16.000000Z","date":"December 17th, 2023 1:46 pm","date_diff":"1 day ago","user_id":349278,"user_name":"CyberKareem","user_avatar":"\/storage\/avatars\/8f2147d3a162aeba1f2416afc4c0274c.png","type":"own"},{"created_at":"2023-12-17T19:46:32.000000Z","date":"December 17th, 2023 9:46 pm","date_diff":"18 hours ago","user_id":412031,"user_name":"AlwaysGuilty","user_avatar":"\/storage\/avatars\/02e4c9ae2ac0e691315111e4b402c962.png","type":"own"},{"created_at":"2023-12-18T02:52:07.000000Z","date":"December 18th, 2023 4:52 am","date_diff":"11 hours ago","user_id":1025369,"user_name":"dmlong","user_avatar":"\/storage\/avatars\/39e2aec4d4d3fa8555220b5bf115d7bf.png","type":"own"},{"created_at":"2023-12-18T09:29:06.000000Z","date":"December 18th, 2023 11:29 am","date_diff":"4 hours ago","user_id":1133223,"user_name":"BossYuhuuu","user_avatar":"\/storage\/avatars\/54b2155a8b7d7b841cb89e627b6edd37.png","type":"own"},{"created_at":"2023-12-18T09:41:04.000000Z","date":"December 18th, 2023 11:41 am","date_diff":"4 hours ago","user_id":880228,"user_name":"AlHacker","user_avatar":"\/storage\/avatars\/eeeb724055b7be57f450c39a4b32f57d.png","type":"own"},{"created_at":"2023-12-18T10:17:28.000000Z","date":"December 18th, 2023 12:17 pm","date_diff":"3 hours ago","user_id":1202167,"user_name":"JiRay4","user_avatar":"\/storage\/avatars\/be2266ed933317290dac746830649463.png","type":"own"}]}}'
+    security:
+      - AppToken: []
+
+ChallengeReview:
+  post:
+    tags:
+      - "Challenges"
+    summary: "Submit a review for a challenge."
+    description: "Allows users to submit their reviews and ratings for a particular challenge."
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: "Unique identifier of the challenge being reviewed."
+              stars:
+                type: integer
+                description: "Rating given by the user, typically on a scale (e.g., 1-5)."
+            example:
+              id: 144
+              stars: 5
+    responses:
+      '200':
+        description: "successful operation"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                info:
+                  type: array
+                  items:
+                    type: string
+                  description: "Confirmation or feedback message regarding the review submission."
+            examples:
+              example:
+                value: '{"info":["Review submitted successfully."]}'
+    security:
+      - AppToken: []
+
+ChallengeReviews:
+  get:
+    tags:
+      - "Challenges"
+    summary: "Get reviews for a specific challenge."
+    description: "Retrieves user-submitted reviews and ratings for a challenge, providing insights into user experiences."
+    parameters:
+      - in: path
+        name: challengeID
+        required: true
+        schema:
+          type: integer
+        description: "Challenge identifier."
+    responses:
+      '200':
+        description: "successful operation"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  description: "The total number of reviews for the challenge."
+                average:
+                  type: number
+                  description: "The average star rating of the challenge."
+                info:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      user_id:
+                        type: integer
+                      stars:
+                        type: integer
+                      title:
+                        type: string
+                      message:
+                        type: string
+                      created_at:
+                        type: string
+                        format: date-time
+                      helpful_reviews_count:
+                        type: integer
+                      authUserInHelpfulChallengeReviews:
+                        type: boolean
+                      released:
+                        type: integer
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          name:
+                            type: string
+                          avatar:
+                            type: string
+                      helpful_reviews:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            user_id:
+                              type: integer
+                            review_id:
+                              type: integer
+            examples:
+              example:
+                value: '{"count":659,"average":4.9,"info":[{"id":2682,"user_id":609847,"stars":5,"title":"Very useful challenge","message":"Good way to start learning about prototype pollution","created_at":"2023-06-18T04:19:44.000000Z","helpful_reviews_count":1,"authUserInHelpfulChallengeReviews":false,"released":1,"user":{"id":609847,"name":"874anthony","avatar":"\/storage\/avatars\/3f01d36743cbdb6777d8970622735e1f.png"},"helpful_reviews":[{"id":116,"user_id":128441,"review_id":2682}]}]}'
+    security:
+      - AppToken: []
+
+ChallengeWriteup:
+  get:
+    tags:
+      - "Challenges"
+    summary: "Access write-ups for a challenge."
+    description: "Fetches available write-ups for a challenge, offering solutions and methodologies used by others."
+    parameters:
+      - in: path
+        name: challengeID
+        required: true
+        schema:
+          type: integer
+        description: "Challenge identifier."
+    responses:
+      '200':
+        description: "successful operation"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+            examples:
+              example:
+                value: '{"data":[]}'
+    security:
+      - AppToken: []
+
+ChallengeHelpfulReview:
+  post:
+    tags:
+      - "Challenges"
+    summary: "Mark a review as helpful."
+    description: "Allows users to mark a specific review as helpful, contributing to the community feedback system."
+    parameters:
+      - in: path
+        name: reviewID
+        required: true
+        schema:
+          type: integer
+        description: "Review identifier."
+    responses:
+      '200':
+        description: "successful operation"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  description: "Confirmation message indicating the review has been marked as helpful."
+            examples:
+              example:
+                value: '{"message":"Success"}'
+    security:
+      - AppToken: []
+
+ChallengeCategoriesList:
+  get:
+    tags:
+      - "Challenges"
+    summary: "List all challenge categories"
+    description: "Provides a list of all challenge categories along with their icons, aiding users in navigating through different types of challenges."
+    responses:
+      '200':
+        description: "successful operation"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                info:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      icon:
+                        type: string
+                        description: "URL of the icon representing the challenge category."
+            examples:
+              example:
+                value: '{"info":[{"id":1,"name":"Reversing","icon":"https:\/\/www.hackthebox.com\/storage\/challenge_categories\/c4ca4238a0b923820dcc509a6f75849b.svg"},{"id":2,"name":"Crypto","icon":"https:\/\/www.hackthebox.com\/storage\/challenge_categories\/c81e728d9d4c2f636f067f89cc14862c.svg"},{"id":4,"name":"Pwn","icon":"https:\/\/www.hackthebox.com\/storage\/challenge_categories\/a87ff679a2f3e71d9181a67b7542122c.svg"},{"id":5,"name":"Web","icon":"https:\/\/www.hackthebox.com\/storage\/challenge_categories\/e4da3b7fbbce2345d7772b0674a318d5.svg"},{"id":6,"name":"Misc","icon":"https:\/\/www.hackthebox.com\/storage\/challenge_categories\/1679091c5a880faf6fb5e6087eb1b2dc.svg"},{"id":7,"name":"Forensics","icon":"https:\/\/www.hackthebox.com\/storage\/challenge_categories\/8f14e45fceea167a5a36dedd4bea2543.svg"},{"id":8,"name":"Mobile","icon":"https:\/\/www.hackthebox.com\/storage\/challenge_categories\/c9f0f895fb98ab9159f51fd0297e236d.svg"},{"id":9,"name":"OSINT","icon":"https:\/\/www.hackthebox.com\/storage\/challenge_categories\/45c48cce2e2d7fbdea1afc51c7c6ad26.svg"},{"id":10,"name":"Hardware","icon":"https:\/\/www.hackthebox.com\/storage\/challenge_categories\/d3d9446802a44259755d38e6d163e820.svg"},{"id":11,"name":"GamePwn","icon":"https:\/\/www.hackthebox.com\/storage\/challenge_categories\/6512bd43d9caa6e02c990b0a82652dca.svg"},{"id":12,"name":"Blockchain","icon":"https:\/\/www.hackthebox.com\/storage\/challenge_categories\/c20ad4d76fe97759aa27a0c99bff6710.svg"}]}'
+    security:
+      - AppToken: []
