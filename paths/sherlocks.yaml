@@ -2,8 +2,8 @@ Sherlocks:
   get:
     tags:
       - "Sherlocks"
-    summary: "List all sherlocks."
-    description: "Returns a list of all available sherlocks."
+    summary: "Retrieve a list of all sherlock challenges."
+    description: "This endpoint provides a comprehensive list of all available sherlock challenges."
     parameters:
       - in: query
         name: state
@@ -41,8 +41,8 @@ SherlockName:
   get:
     tags:
       - "Sherlocks"
-    summary: "Get information about a sherlock."
-    description: "Returns detailed information about a specific sherlock."
+    summary: "Retrieve detailed information about a specific sherlock challenge."
+    description: "This endpoint provides detailed information about a sherlock challenge identified by the sherlockID."
     parameters:
       - in: path
         name: sherlockName
@@ -292,16 +292,151 @@ SherlockFlag:
     security:
       - AppToken: []
 
-# GET /api/v4/sherlocks/560/writeup
-# {"data":{"official":{"filename":"Knock Knock.pdf","sha256":"b61031681bc5723b238b071d46cf7117730084e68d1942a7c0488f7a30db153a","url":"https:\/\/www.hackthebox.com\/api\/v4\/sherlocks\/560\/writeup\/official"}}}
+SherlockWriteup:
+  get:
+    tags:
+      - "Sherlocks"
+    summary: "Retrieve the official write-up for a sherlock challenge."
+    description: "This endpoint provides details of the official write-up for a given sherlock challenge, identified by the sherlockID."
+    parameters:
+      - in: path
+        name: sherlockID
+        required: true
+        schema:
+          type: integer
+        description: "Unique identifier of the sherlock challenge."
+    responses:
+      '200':
+        description: "successful operation"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    official:
+                      type: object
+                      properties:
+                        filename:
+                          type: string
+                          description: "The filename of the official write-up."
+                        sha256:
+                          type: string
+                          description: "The SHA-256 checksum of the write-up file."
+                        url:
+                          type: string
+                          description: "URL to download the official write-up."
+            examples:
+              example:
+                value: '{"data":{"official":{"filename":"Knock Knock.pdf","sha256":"b61031681bc5723b238b071d46cf7117730084e68d1942a7c0488f7a30db153a","url":"https:\/\/www.hackthebox.com\/api\/v4\/sherlocks\/560\/writeup\/official"}}}'
+    security:
+      - AppToken: []
 
-# GET /api/v4/review/sherlock/560
-# {"count":14,"average":4.6,"info":[{"id":4594,"user_id":287476,"stars":5,"title":"Really fun","message":"Whilst there were some elements that left my ripping my hair out for a period of time, this was a fantastic lab.\n\nYou're forced to learn about time-lining of events, filtering packets and techniques used by TA's during the initial stages of the Kill-Chain.\n\nThanks, CyberJunkie","created_at":"2023-11-18T14:00:30.000000Z","helpful_reviews_count":4,"authUserInHelpfulChallengeReviews":false,"released":1,"user":{"id":287476,"name":"0xFT","avatar":"\/storage\/avatars\/282b2fff1192c3729168227bde633ad5.png"},"helpful_reviews":[{"id":103,"user_id":468989,"review_id":4594},{"id":109,"user_id":326815,"review_id":4594},{"id":111,"user_id":795682,"review_id":4594},{"id":114,"user_id":128441,"review_id":4594}]}]}
+SherlockReview:
+  get:
+    tags:
+      - "Sherlocks"
+    summary: "Retrieve reviews and ratings for a specific sherlock challenge."
+    description: "This endpoint fetches reviews and ratings for a sherlock challenge identified by the sherlockID."
+    parameters:
+      - in: path
+        name: sherlockID
+        required: true
+        schema:
+          type: integer
+        description: "Unique identifier of the sherlock challenge."
+    responses:
+      '200':
+        description: "successful operation"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  description: "Total number of reviews for the challenge."
+                average:
+                  type: number
+                  format: double
+                  description: "Average rating of the challenge."
+                info:
+                  type: array
+                  items:
+                    $ref: '../main.yaml#/components/schemas/Review'
+            examples:
+              example:
+                value: '{"count":14,"average":4.6,"info":[{"id":4594,"user_id":287476,"stars":5,"title":"Really fun","message":"Whilst there were some elements that left my ripping my hair out for a period of time, this was a fantastic lab.\n\nYou\"re forced to learn about time-lining of events, filtering packets and techniques used by TA\"s during the initial stages of the Kill-Chain.\n\nThanks, CyberJunkie","created_at":"2023-11-18T14:00:30.000000Z","helpful_reviews_count":4,"authUserInHelpfulChallengeReviews":false,"released":1,"user":{"id":287476,"name":"0xFT","avatar":"\/storage\/avatars\/282b2fff1192c3729168227bde633ad5.png"},"helpful_reviews":[{"id":103,"user_id":468989,"review_id":4594},{"id":109,"user_id":326815,"review_id":4594},{"id":111,"user_id":795682,"review_id":4594},{"id":114,"user_id":128441,"review_id":4594}]}]}'
+    security:
+      - AppToken: []
 
-# GET /api/v4/sherlocks/560/info
-# {"data":{"id":560,"description":"You are thrusted into a digital crisis at Forela - a crucial Dev server has fallen victim to a cyber attack. This incident unfolds at a critical time for the company as it is expanding its business in Pakistan, under the leadership of senior dev Abdullah. Despite assurances of server hardening, the server was mistakenly exposed to the internet, creating a doorway for the threat actor. The task involves swift analysis & reporting to prevent catastrophic damage to the company's operations. Equipped with a packet capture from the time of the incident, players must sift through a sea of data, with a 1-2 days margin of uncertainty. This cybersecurity whodunit will put your forensic skills to the test, seeking answers to how the attacker breached their defenses in the first place.\r\n\r\n\r\nWarning: This Sherlock will require an element of OSINT to complete fully.","user_owns_count":122}}
+SherlockInfo:
+  get:
+    tags:
+      - "Sherlocks"
+    summary: "Retrieve detailed information about a specific sherlock challenge."
+    description: "This endpoint provides comprehensive details about a particular sherlock challenge, identified by the sherlockID."
+    parameters:
+      - in: path
+        name: sherlockID
+        required: true
+        schema:
+          type: integer
+        description: "Unique identifier of the sherlock challenge."
+    responses:
+      '200':
+        description: "successful operation"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    description:
+                      type: string
+                    user_owns_count:
+                      type: integer
+                      description: "The number of users who have completed the challenge."
+            examples:
+              example:
+                value: '{"data":{"id":560,"description":"You are thrusted into a digital crisis at Forela - a crucial Dev server has fallen victim to a cyber attack. This incident unfolds at a critical time for the company as it is expanding its business in Pakistan, under the leadership of senior dev Abdullah. Despite assurances of server hardening, the server was mistakenly exposed to the internet, creating a doorway for the threat actor. The task involves swift analysis & reporting to prevent catastrophic damage to the company\"s operations. Equipped with a packet capture from the time of the incident, players must sift through a sea of data, with a 1-2 days margin of uncertainty. This cybersecurity whodunit will put your forensic skills to the test, seeking answers to how the attacker breached their defenses in the first place.\r\n\r\n\r\nWarning: This Sherlock will require an element of OSINT to complete fully.","user_owns_count":122}}'
+    security:
+      - AppToken: []
 
-# GET /api/v4/sherlocks/560/writeup/official
-# %PDF-1.7
-    
+SherlockWriteupOfficial:
+  get:
+    tags:
+      - "Sherlocks"
+    summary: "Retrieve the official write-up for a specific sherlock challenge."
+    description: "This endpoint delivers the official write-up document for the sherlock challenge identified by the sherlockID."
+    parameters:
+      - in: path
+        name: sherlockID
+        required: true
+        schema:
+          type: integer
+        description: "Unique identifier of the sherlock challenge."
+    responses:
+      '200':
+        description: "successful operation"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  description: "The content of the official write-up, typically in PDF format."
+            examples:
+              example:
+                value: 'PDF Content'
+    security:
+      - AppToken: []
+
 # TODO : review

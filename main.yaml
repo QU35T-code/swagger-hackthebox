@@ -33,6 +33,9 @@ paths:
 
   /sherlocks/{sherlockName}:
     $ref: './paths/sherlocks.yaml#/SherlockName'
+  
+  /sherlocks/{sherlockID}/info:
+    $ref: './paths/sherlocks.yaml#/SherlockInfo'
 
   /sherlocks/{sherlockID}/play:
     $ref: './paths/sherlocks.yaml#/SherlockPlay'
@@ -45,6 +48,15 @@ paths:
 
   /sherlocks/{sherlockID}/download_link:
     $ref: './paths/sherlocks.yaml#/SherlockDownloadLink'
+
+  /review/sherlocks/{sherlockID}:
+    $ref: './paths/sherlocks.yaml#/SherlockReview'
+  
+  /sherlocks/{sherlockID}/writeup:
+    $ref: './paths/sherlocks.yaml#/SherlockWriteup'
+  
+  /sherlocks/{sherlockID}/writeup/official:
+    $ref: './paths/sherlocks.yaml#/SherlockWriteupOfficial'
 
   /sherlocks/{sherlockID}/tasks/{taskID}/flag:
     $ref: './paths/sherlocks.yaml#/SherlockFlag'
@@ -165,6 +177,48 @@ components:
             type: string
         flag:
           type: string
+    Review:
+      type: object
+      properties:
+        id:
+          type: integer
+        user_id:
+          type: integer
+        stars:
+          type: integer
+        title:
+          type: string
+        message:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        helpful_reviews_count:
+          type: integer
+        authUserInHelpfulChallengeReviews:
+          type: boolean
+        released:
+          type: integer
+        user:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            avatar:
+              type: string
+        helpful_reviews:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              user_id:
+                type: integer
+              review_id:
+                type: integer
 
   securitySchemes:
     AppToken:
